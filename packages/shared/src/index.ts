@@ -3,13 +3,19 @@
  * Common types, helpers, and error handling for all MCP servers.
  */
 
-import type {
+export {
   CallToolRequest,
   ListToolsResult,
   Tool,
-} from "@modelcontextprotocol/sdk";
+  CallToolRequestSchema,
+  ListToolsRequestSchema,
+} from "./mcp-sdk";
+
+export { Server, StdioServerTransport } from "./mcp-server";
 
 // ── Type Utilities ────────────────────────────────────
+
+import type { CallToolRequest } from "./mcp-sdk";
 
 export type ToolHandler = (
   request: CallToolRequest
@@ -35,7 +41,7 @@ export function success(message: string) {
 
 export function error(message: string) {
   return {
-    content: [{ type: "text" as const, text: `�?Error: ${message}` }],
+    content: [{ type: "text" as const, text: `�?Error: ${message}` }],
     isError: true,
   };
 }

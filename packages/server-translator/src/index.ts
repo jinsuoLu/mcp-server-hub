@@ -4,12 +4,7 @@
  * Free translation via MyMemory API (no key).
  */
 
-import { Server } from "@modelcontextprotocol/sdk/server/index";
-import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio";
-import {
-  CallToolRequestSchema,
-  ListToolsRequestSchema,
-} from "@modelcontextprotocol/sdk/types";
+import { Server, StdioServerTransport, CallToolRequestSchema, ListToolsRequestSchema } from "@mcp-hub/shared";
 import { success, error, requireParam, getOptionalParam } from "@mcp-hub/shared";
 
 const server = new Server(
@@ -106,9 +101,9 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
         return success(
           `🌍 Translation\n` +
-            `📥 ${fromName} �?📤 ${toName}\n` +
+            `📥 ${fromName} �?📤 ${toName}\n` +
             `📝 Original: ${text}\n` +
-            `�?Result: ${result}`
+            `�?Result: ${result}`
         );
       }
 
@@ -141,7 +136,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         return success(
           `🔍 Language Detection\n` +
             `📝 Text: ${text.slice(0, 100)}${text.length > 100 ? "..." : ""}\n` +
-            `🏷�?Detected: ${LANG_MAP[detected]} (${detected})`
+            `🏷�?Detected: ${LANG_MAP[detected]} (${detected})`
         );
       }
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * 🌤�?MCP Weather Server
+ * 🌤�?MCP Weather Server
  * Free weather API via Open-Meteo (no API key needed).
  *
  * Tools:
@@ -9,12 +9,7 @@
  *   - get_air_quality: air quality index
  */
 
-import { Server } from "@modelcontextprotocol/sdk/server/index";
-import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio";
-import {
-  CallToolRequestSchema,
-  ListToolsRequestSchema,
-} from "@modelcontextprotocol/sdk/types";
+import { Server, StdioServerTransport, CallToolRequestSchema, ListToolsRequestSchema } from "@mcp-hub/shared";
 import { success, error, requireParam, jsonResponse } from "@mcp-hub/shared";
 
 // ── Server Setup ──────────────────────────────────────
@@ -43,25 +38,25 @@ async function fetchAirQuality(lat: string, lon: string) {
 // ── WMO Weather Code Mapping ──────────────────────────
 
 const WMO_CODES: Record<number, string> = {
-  0: "☀�?Clear sky",
-  1: "🌤�?Mainly clear",
-  2: "�?Partly cloudy",
+  0: "☀�?Clear sky",
+  1: "🌤�?Mainly clear",
+  2: "�?Partly cloudy",
   3: "☁️ Overcast",
-  45: "🌫�?Foggy",
-  48: "🌫�?Depositing rime fog",
-  51: "🌧�?Light drizzle",
-  53: "🌧�?Moderate drizzle",
-  55: "🌧�?Dense drizzle",
-  61: "🌧�?Slight rain",
-  63: "🌧�?Moderate rain",
-  65: "🌧�?Heavy rain",
+  45: "🌫�?Foggy",
+  48: "🌫�?Depositing rime fog",
+  51: "🌧�?Light drizzle",
+  53: "🌧�?Moderate drizzle",
+  55: "🌧�?Dense drizzle",
+  61: "🌧�?Slight rain",
+  63: "🌧�?Moderate rain",
+  65: "🌧�?Heavy rain",
   71: "❄️ Slight snow",
   73: "❄️ Moderate snow",
   75: "❄️ Heavy snow",
   77: "❄️ Snow grains",
-  80: "🌧�?Slight rain showers",
-  81: "🌧�?Moderate rain showers",
-  82: "🌧�?Violent rain showers",
+  80: "🌧�?Slight rain showers",
+  81: "🌧�?Moderate rain showers",
+  82: "🌧�?Violent rain showers",
   85: "❄️ Slight snow showers",
   86: "❄️ Heavy snow showers",
   95: "⛈️ Thunderstorm",
@@ -70,7 +65,7 @@ const WMO_CODES: Record<number, string> = {
 };
 
 function weatherEmoji(code: number): string {
-  return WMO_CODES[code]?.split(" ")[0] ?? "�?;
+  return WMO_CODES[code]?.split(" ")[0] ?? "�?;
 }
 
 function weatherDesc(code: number): string {
@@ -139,7 +134,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
         const lines: string[] = [
           `📍 Forecast for ${lat}, ${lon}`,
-          `🌡�?Current: ${data.current.temperature_2m}°C (feels like ${data.current.apparent_temperature}°C)`,
+          `🌡�?Current: ${data.current.temperature_2m}°C (feels like ${data.current.apparent_temperature}°C)`,
           `${weatherEmoji(data.current.weather_code)} ${weatherDesc(data.current.weather_code)}`,
           `💨 Wind: ${data.current.wind_speed_10m} km/h`,
           `💧 Humidity: ${data.current.relative_humidity_2m}%`,
@@ -151,7 +146,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
           const code = data.daily.weather_code[i];
           const rain = data.daily.precipitation_probability_max[i];
           lines.push(
-            `  ${data.daily.time[i]}: ${weatherEmoji(code)} ${data.daily.temperature_2m_min[i]}°C ~ ${data.daily.temperature_2m_max[i]}°C  🌧�?{rain}%`
+            `  ${data.daily.time[i]}: ${weatherEmoji(code)} ${data.daily.temperature_2m_min[i]}°C ~ ${data.daily.temperature_2m_max[i]}°C  🌧�?{rain}%`
           );
         }
 
@@ -167,7 +162,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         return success(
           `📍 ${lat}, ${lon}\n` +
             `${weatherEmoji(c.weather_code)} ${weatherDesc(c.weather_code)}\n` +
-            `🌡�?Temperature: ${c.temperature_2m}°C\n` +
+            `🌡�?Temperature: ${c.temperature_2m}°C\n` +
             `🤔 Feels like: ${c.apparent_temperature}°C\n` +
             `💨 Wind: ${c.wind_speed_10m} km/h (${c.wind_direction_10m}°)\n` +
             `💧 Humidity: ${c.relative_humidity_2m}%`
@@ -195,13 +190,13 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             : "🟤 Hazardous";
 
         return success(
-          `🌬�?Air Quality - ${lat}, ${lon}\n` +
+          `🌬�?Air Quality - ${lat}, ${lon}\n` +
             `📊 US AQI: ${usAqi} ${level}\n` +
             `📊 EU AQI: ${aq.european_aqi}\n` +
             `🔬 PM2.5: ${aq.pm2_5} µg/m³\n` +
             `🔬 PM10: ${aq.pm10} µg/m³\n` +
             `🫁 CO: ${aq.carbon_monoxide} µg/m³\n` +
-            `🫁 NO�? ${aq.nitrogen_dioxide} µg/m³`
+            `🫁 NO�? ${aq.nitrogen_dioxide} µg/m³`
         );
       }
 
@@ -218,7 +213,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.error("🌤�?MCP Weather Server running on stdio");
+  console.error("🌤�?MCP Weather Server running on stdio");
 }
 
 main().catch((e) => {

@@ -4,12 +4,7 @@
  * Timezone conversion, date arithmetic, countdown.
  */
 
-import { Server } from "@modelcontextprotocol/sdk/server/index";
-import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio";
-import {
-  CallToolRequestSchema,
-  ListToolsRequestSchema,
-} from "@modelcontextprotocol/sdk/types";
+import { Server, StdioServerTransport, CallToolRequestSchema, ListToolsRequestSchema } from "@mcp-hub/shared";
 import { success, error, requireParam, getOptionalParam } from "@mcp-hub/shared";
 
 const server = new Server(
@@ -110,7 +105,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         return success(
           `ðŸ• Current Time (${tz})\n` +
             `ðŸ“… Date: ${formatDate(d)}\n` +
-            `â?Time: ${d.toLocaleTimeString("zh-CN", { hour12: false })}\n` +
+            `ï¿½?Time: ${d.toLocaleTimeString("zh-CN", { hour12: false })}\n` +
             `ðŸ“Œ ${DAYS_CN[d.getDay()]} Week ${Math.ceil(d.getDate() / 7)}\n` +
             `ðŸ• Unix: ${Math.floor(d.getTime() / 1000)}`
         );
@@ -145,7 +140,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         return success(
           `ðŸ“… Date Calculation\n` +
             `ðŸ“Œ From: ${formatDate(from)} (${DAYS_CN[from.getDay()]})\n` +
-            `${days >= 0 ? "âž? : "âž?} ${Math.abs(days)} days\n` +
+            `${days >= 0 ? "ï¿½? : "ï¿½?} ${Math.abs(days)} days\n` +
             `ðŸŽ¯ Result: ${formatDate(result)} (${DAYS_CN[result.getDay()]})`
         );
       }
@@ -172,7 +167,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
         if (days < 0) {
           return success(
-            `â?${targetStr} has passed!\n` +
+            `ï¿½?${targetStr} has passed!\n` +
               `It was ${Math.abs(days)} days ago (${DAYS_CN[target.getDay()]}).`
           );
         }
@@ -181,9 +176,9 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         const remaining = days % 7;
 
         return success(
-          `â?Countdown to ${targetStr} (${DAYS_CN[target.getDay()]})\n` +
+          `ï¿½?Countdown to ${targetStr} (${DAYS_CN[target.getDay()]})\n` +
             `ðŸ“Š ${days} days remaining\n` +
-            `ðŸ—“ï¸?That's ${weeks} weeks ${remaining > 0 ? `+ ${remaining} days` : ""}`
+            `ðŸ—“ï¿½?That's ${weeks} weeks ${remaining > 0 ? `+ ${remaining} days` : ""}`
         );
       }
 

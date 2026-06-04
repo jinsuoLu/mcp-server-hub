@@ -4,12 +4,7 @@
  * Safe math expression evaluation with detailed output.
  */
 
-import { Server } from "@modelcontextprotocol/sdk/server/index";
-import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio";
-import {
-  CallToolRequestSchema,
-  ListToolsRequestSchema,
-} from "@modelcontextprotocol/sdk/types";
+import { Server, StdioServerTransport, CallToolRequestSchema, ListToolsRequestSchema } from "@mcp-hub/shared";
 import { success, error, requireParam } from "@mcp-hub/shared";
 
 const server = new Server(

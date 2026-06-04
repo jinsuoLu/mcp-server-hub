@@ -4,12 +4,7 @@
  * Safe file read/write/list/search operations within allowed directories.
  */
 
-import { Server } from "@modelcontextprotocol/sdk/server/index";
-import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio";
-import {
-  CallToolRequestSchema,
-  ListToolsRequestSchema,
-} from "@modelcontextprotocol/sdk/types";
+import { Server, StdioServerTransport, CallToolRequestSchema, ListToolsRequestSchema } from "@mcp-hub/shared";
 import { success, error, requireParam, getOptionalParam } from "@mcp-hub/shared";
 import * as fs from "node:fs";
 import * as path from "node:path";
@@ -142,7 +137,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         const dir = path.dirname(filePath);
         if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
         fs.writeFileSync(filePath, content, "utf-8");
-        return success(`âœ?Written: ${filePath} (${content.length} chars)`);
+        return success(`ï¿½?Written: ${filePath} (${content.length} chars)`);
       }
 
       case "list_directory": {
