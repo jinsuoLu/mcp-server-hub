@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /**
- * 🗄️ MCP Database Server
+ * 🗄�?MCP Database Server
  * SQL query interface for SQLite (read-only by default).
  */
-import{Server}from"@modelcontextprotocol/sdk/server/index.js";import{StdioServerTransport}from"@modelcontextprotocol/sdk/server/stdio.js";import{CallToolRequestSchema,ListToolsRequestSchema}from"@modelcontextprotocol/sdk/types.js";import{success,error,requireParam,getOptionalParam}from"@mcp-hub/shared";
+import{Server}from"@modelcontextprotocol/sdk/server/index";import{StdioServerTransport}from"@modelcontextprotocol/sdk/server/stdio";import{CallToolRequestSchema,ListToolsRequestSchema}from"@modelcontextprotocol/sdk/types";import{success,error,requireParam,getOptionalParam}from"@mcp-hub/shared";
 const DB_PATH=process.env.MCP_DB_PATH||":memory:";const READONLY=process.env.MCP_DB_READONLY!=="false";
 let db:any=null;
 function getDB(){if(!db){try{const Database=require("better-sqlite3");db=new Database(DB_PATH,{readonly:READONLY});db.pragma("journal_mode=WAL")}catch(e){throw new Error(`Cannot open database:${e.message}. Install better-sqlite3: npm install better-sqlite3`)}}return db}
@@ -13,7 +13,7 @@ server.setRequestHandler(CallToolRequestSchema,async(request)=>{try{const{name,a
 case"db_tables":{const rows=d.prepare("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name").all();const lines=[`📋 Tables (${rows.length}):`];rows.forEach((r:any,i:number)=>lines.push(`  ${i+1}. ${r.name}`));return success(lines.join("\n"))}
 case"db_schema":{const table=requireParam(args,"table");const row=d.prepare("SELECT sql FROM sqlite_master WHERE type='table' AND name=?").get(table);if(!row)return error(`Table not found:${table}`);return success(`📐 Schema:${table}\n\n${row.sql}`)}
 case"db_stats":{const tables=d.prepare("SELECT name FROM sqlite_master WHERE type='table'").all();const lines=["📊 Database Statistics",`📁 Path:${DB_PATH}`,`🔒 Mode:${READONLY?"Read-only":"Read/Write"}`,""];for(const t of tables){const cnt=d.prepare(`SELECT COUNT(*) as c FROM "${t.name}"`).get();lines.push(`📋 ${t.name}:${cnt.c} rows`)}return success(lines.join("\n"))}
-case"db_execute":{if(READONLY)return error("Database is in read-only mode. Set MCP_DB_READONLY=false to enable writes.");const sql=requireParam(args,"sql");const result=d.prepare(sql).run();return success(`✅ Executed OK\n📝 Changes:${result.changes}\n🆔 Last ID:${result.lastInsertRowid||"N/A"}`)}
+case"db_execute":{if(READONLY)return error("Database is in read-only mode. Set MCP_DB_READONLY=false to enable writes.");const sql=requireParam(args,"sql");const result=d.prepare(sql).run();return success(`�?Executed OK\n📝 Changes:${result.changes}\n🆔 Last ID:${result.lastInsertRowid||"N/A"}`)}
 default:return error(`Unknown tool:${name}`)}}catch(e){return error(e.message)}});
-async function main(){const transport=new StdioServerTransport();await server.connect(transport);console.error(`🗄️ MCP Database Server running on stdio (${DB_PATH})`)}
+async function main(){const transport=new StdioServerTransport();await server.connect(transport);console.error(`🗄�?MCP Database Server running on stdio (${DB_PATH})`)}
 main().catch(e=>{console.error("Fatal error:",e);process.exit(1)});

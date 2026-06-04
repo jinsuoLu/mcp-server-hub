@@ -4,12 +4,12 @@
  * Timezone conversion, date arithmetic, countdown.
  */
 
-import { Server } from "@modelcontextprotocol/sdk/server/index.js";
-import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import { Server } from "@modelcontextprotocol/sdk/server/index";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio";
 import {
   CallToolRequestSchema,
   ListToolsRequestSchema,
-} from "@modelcontextprotocol/sdk/types.js";
+} from "@modelcontextprotocol/sdk/types";
 import { success, error, requireParam, getOptionalParam } from "@mcp-hub/shared";
 
 const server = new Server(
@@ -110,7 +110,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         return success(
           `🕐 Current Time (${tz})\n` +
             `📅 Date: ${formatDate(d)}\n` +
-            `⏰ Time: ${d.toLocaleTimeString("zh-CN", { hour12: false })}\n` +
+            `�?Time: ${d.toLocaleTimeString("zh-CN", { hour12: false })}\n` +
             `📌 ${DAYS_CN[d.getDay()]} Week ${Math.ceil(d.getDate() / 7)}\n` +
             `🕐 Unix: ${Math.floor(d.getTime() / 1000)}`
         );
@@ -145,7 +145,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         return success(
           `📅 Date Calculation\n` +
             `📌 From: ${formatDate(from)} (${DAYS_CN[from.getDay()]})\n` +
-            `${days >= 0 ? "➕" : "➖"} ${Math.abs(days)} days\n` +
+            `${days >= 0 ? "�? : "�?} ${Math.abs(days)} days\n` +
             `🎯 Result: ${formatDate(result)} (${DAYS_CN[result.getDay()]})`
         );
       }
@@ -172,7 +172,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
         if (days < 0) {
           return success(
-            `⏰ ${targetStr} has passed!\n` +
+            `�?${targetStr} has passed!\n` +
               `It was ${Math.abs(days)} days ago (${DAYS_CN[target.getDay()]}).`
           );
         }
@@ -181,9 +181,9 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         const remaining = days % 7;
 
         return success(
-          `⏳ Countdown to ${targetStr} (${DAYS_CN[target.getDay()]})\n` +
+          `�?Countdown to ${targetStr} (${DAYS_CN[target.getDay()]})\n` +
             `📊 ${days} days remaining\n` +
-            `🗓️ That's ${weeks} weeks ${remaining > 0 ? `+ ${remaining} days` : ""}`
+            `🗓�?That's ${weeks} weeks ${remaining > 0 ? `+ ${remaining} days` : ""}`
         );
       }
 

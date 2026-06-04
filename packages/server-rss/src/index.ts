@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import{Server}from"@modelcontextprotocol/sdk/server/index.js";import{StdioServerTransport}from"@modelcontextprotocol/sdk/server/stdio.js";import{CallToolRequestSchema,ListToolsRequestSchema}from"@modelcontextprotocol/sdk/types.js";import{success,error,requireParam}from"@mcp-hub/shared";
+import{Server}from"@modelcontextprotocol/sdk/server/index";import{StdioServerTransport}from"@modelcontextprotocol/sdk/server/stdio";import{CallToolRequestSchema,ListToolsRequestSchema}from"@modelcontextprotocol/sdk/types";import{success,error,requireParam}from"@mcp-hub/shared";
 const server=new Server({name:"mcp-server-rss",version:"1.0.0"},{capabilities:{tools:{}}});
 async function fetchFeed(url){const resp=await fetch(url,{headers:{"User-Agent":"Mozilla/5.0 (compatible; MCPBot/1.0)"}});if(!resp.ok)throw new Error("HTTP "+resp.status);const xml=await resp.text();const items=[];const re=/<item>([\s\S]*?)<\/item>/gi;let m;while((m=re.exec(xml))!==null){const b=m[1];items.push({title:getTag(b,"title"),link:getTag(b,"link"),pubDate:getTag(b,"pubDate"),desc:cleanHtml(getTag(b,"description")).slice(0,300)})}
 const cm=xml.match(/<title>([^<]+)<\/title>/);return{title:cm?cm[1].replace(/<![\\[]CDATA[|[]]>/g,""):"Feed",items}}

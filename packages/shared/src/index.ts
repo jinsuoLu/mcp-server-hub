@@ -7,7 +7,7 @@ import type {
   CallToolRequest,
   ListToolsResult,
   Tool,
-} from "@modelcontextprotocol/sdk/types.js";
+} from "@modelcontextprotocol/sdk";
 
 // ── Type Utilities ────────────────────────────────────
 
@@ -35,7 +35,7 @@ export function success(message: string) {
 
 export function error(message: string) {
   return {
-    content: [{ type: "text" as const, text: `❌ Error: ${message}` }],
+    content: [{ type: "text" as const, text: `�?Error: ${message}` }],
     isError: true,
   };
 }
