@@ -19,7 +19,9 @@ COPY packages/server-fetch/package.json packages/server-fetch/tsconfig.json ./pa
 COPY packages/server-code-runner/package.json packages/server-code-runner/tsconfig.json ./packages/server-code-runner/
 COPY packages/server-knowledge/package.json packages/server-knowledge/tsconfig.json ./packages/server-knowledge/
 
-RUN npm install
+RUN npm install -g pnpm@9.4.0 && \
+    pnpm config set allow-builds.better-sqlite3 true && \
+    pnpm install --shamefully-hoist
 
 COPY packages/shared/src ./packages/shared/src
 COPY packages/server-weather/src ./packages/server-weather/src
