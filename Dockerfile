@@ -17,7 +17,9 @@ COPY packages/server-fetch/package.json packages/server-fetch/tsconfig.json ./pa
 COPY packages/server-code-runner/package.json packages/server-code-runner/tsconfig.json ./packages/server-code-runner/
 COPY packages/server-knowledge/package.json packages/server-knowledge/tsconfig.json ./packages/server-knowledge/
 
-RUN npm install -g pnpm && pnpm install --no-frozen-lockfile
+RUN npm install -g pnpm && \
+    pnpm config set ignore-scripts false && \
+    pnpm install --no-frozen-lockfile
 
 COPY packages/shared/src ./packages/shared/src
 COPY packages/server-weather/src ./packages/server-weather/src
