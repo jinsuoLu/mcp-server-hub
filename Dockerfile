@@ -19,8 +19,7 @@ COPY packages/server-fetch/package.json packages/server-fetch/tsconfig.json ./pa
 COPY packages/server-code-runner/package.json packages/server-code-runner/tsconfig.json ./packages/server-code-runner/
 COPY packages/server-knowledge/package.json packages/server-knowledge/tsconfig.json ./packages/server-knowledge/
 
-RUN npm install -g pnpm && \
-    pnpm install --no-frozen-lockfile --unsafe-perm
+RUN npm install
 
 COPY packages/shared/src ./packages/shared/src
 COPY packages/server-weather/src ./packages/server-weather/src
@@ -37,7 +36,7 @@ COPY packages/server-fetch/src ./packages/server-fetch/src
 COPY packages/server-code-runner/src ./packages/server-code-runner/src
 COPY packages/server-knowledge/src ./packages/server-knowledge/src
 
-RUN pnpm build
+RUN npm run build
 
 FROM node:22-alpine
 WORKDIR /app
