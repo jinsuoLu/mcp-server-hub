@@ -1,6 +1,6 @@
 FROM node:22-alpine AS builder
 WORKDIR /app
-RUN apk add --no-cache build-base python3 libsqlite3-dev
+RUN apk add --no-cache build-base python3 sqlite-dev
 COPY pnpm-workspace.yaml package.json tsconfig.base.json ./
 COPY packages/shared/package.json packages/shared/tsconfig.json ./packages/shared/
 
