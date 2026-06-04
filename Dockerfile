@@ -38,21 +38,21 @@ COPY packages/server-fetch/src ./packages/server-fetch/src
 COPY packages/server-code-runner/src ./packages/server-code-runner/src
 COPY packages/server-knowledge/src ./packages/server-knowledge/src
 
-RUN npx tsc --project packages/shared && \
-    npx tsc --project packages/server-weather && \
-    npx tsc --project packages/server-translator && \
-    npx tsc --project packages/server-datetime && \
-    npx tsc --project packages/server-calculator && \
-    npx tsc --project packages/server-qrcode && \
-    npx tsc --project packages/server-rss && \
-    npx tsc --project packages/server-memory && \
-    npx tsc --project packages/server-fetch && \
-    npx tsc --project packages/server-web-search && \
-    npx tsc --project packages/server-code-runner && \
-    npx tsc --project packages/server-knowledge && \
-    npx tsc --project packages/server-database && \
-    npx tsc --project packages/server-filesystem && \
-    npx tsc --project packages/cli
+RUN pnpm exec tsc --project packages/shared && \
+    pnpm exec tsc --project packages/server-weather && \
+    pnpm exec tsc --project packages/server-translator && \
+    pnpm exec tsc --project packages/server-datetime && \
+    pnpm exec tsc --project packages/server-calculator && \
+    pnpm exec tsc --project packages/server-qrcode && \
+    pnpm exec tsc --project packages/server-rss && \
+    pnpm exec tsc --project packages/server-memory && \
+    pnpm exec tsc --project packages/server-fetch && \
+    pnpm exec tsc --project packages/server-web-search && \
+    pnpm exec tsc --project packages/server-code-runner && \
+    pnpm exec tsc --project packages/server-knowledge && \
+    pnpm exec tsc --project packages/server-database && \
+    pnpm exec tsc --project packages/server-filesystem && \
+    pnpm exec tsc --project packages/cli
 
 FROM node:22-alpine
 WORKDIR /app
