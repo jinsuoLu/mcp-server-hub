@@ -10,12 +10,10 @@
     "dev": "tsc --watch",
     "clean": "rm -rf dist"
   },
-  "dependencies": {},
-  "devDependencies": {
-    "@modelcontextprotocol/sdk": "^1.0.0",
-    "typescript": "^5.4.0"
-  },
-  "peerDependencies": {
+  "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0"
   }
 }
