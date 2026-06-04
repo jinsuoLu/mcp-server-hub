@@ -1,0 +1,22 @@
+{
+  "name": "@mcp-hub/server-filesystem",
+  "version": "1.0.0",
+  "description": "📁 MCP Filesystem Server - Safe file operations",
+  "type": "module",
+  "main": "./dist/index.js",
+  "bin": { "mcp-server-filesystem": "./dist/index.js" },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@mcp-hub/shared": "workspace:*",
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  },
+  "devDependencies": { "typescript": "^5.4.0" },
+  "keywords": ["mcp", "filesystem", "file-management"],
+  "author": "cosmicdk",
+  "license": "MIT"
+}

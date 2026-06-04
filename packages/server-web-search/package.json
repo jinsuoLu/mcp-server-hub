@@ -1,0 +1,22 @@
+{
+  "name": "@mcp-hub/server-web-search",
+  "version": "1.0.0",
+  "description": "🔍 MCP Web Search Server - Multi-engine search",
+  "type": "module",
+  "main": "./dist/index.js",
+  "bin": { "mcp-server-web-search": "./dist/index.js" },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@mcp-hub/shared": "workspace:*",
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  },
+  "devDependencies": { "typescript": "^5.4.0" },
+  "keywords": ["mcp", "search", "web-search"],
+  "author": "cosmicdk",
+  "license": "MIT"
+}

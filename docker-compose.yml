@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  weather:
+    build:
+      context: .
+      dockerfile: packages/server-weather/Dockerfile
+    restart: unless-stopped
+
+  datetime:
+    build:
+      context: .
+      dockerfile: packages/server-datetime/Dockerfile
+    restart: unless-stopped
+
+  filesystem:
+    build:
+      context: .
+      dockerfile: packages/server-filesystem/Dockerfile
+    restart: unless-stopped
+    volumes:
+      - /home:/home:ro
+      - /tmp:/tmp
+    environment:
+      - MCP_ALLOWED_DIRS=/home:/tmp
+
+  calculator:
+    build:
+      context: .
+      dockerfile: packages/server-calculator/Dockerfile
+    restart: unless-stopped
+
+  web-search:
+    build:
+      context: .
+      dockerfile: packages/server-web-search/Dockerfile
+    restart: unless-stopped
+
+  translator:
+    build:
+      context: .
+      dockerfile: packages/server-translator/Dockerfile
+    restart: unless-stopped

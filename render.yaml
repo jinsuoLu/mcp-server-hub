@@ -1,0 +1,136 @@
+services:
+  - type: web
+    name: mcp-server-weather
+    env: docker
+    dockerfilePath: Dockerfile
+    dockerCommand: "node packages/server-weather/dist/index.js"
+    plan: starter
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+  - type: web
+    name: mcp-server-translator
+    env: docker
+    dockerfilePath: Dockerfile
+    dockerCommand: "node packages/server-translator/dist/index.js"
+    plan: starter
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+  - type: web
+    name: mcp-server-datetime
+    env: docker
+    dockerfilePath: Dockerfile
+    dockerCommand: "node packages/server-datetime/dist/index.js"
+    plan: starter
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+  - type: web
+    name: mcp-server-calculator
+    env: docker
+    dockerfilePath: Dockerfile
+    dockerCommand: "node packages/server-calculator/dist/index.js"
+    plan: starter
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+  - type: web
+    name: mcp-server-qrcode
+    env: docker
+    dockerfilePath: Dockerfile
+    dockerCommand: "node packages/server-qrcode/dist/index.js"
+    plan: starter
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+  - type: web
+    name: mcp-server-rss
+    env: docker
+    dockerfilePath: Dockerfile
+    dockerCommand: "node packages/server-rss/dist/index.js"
+    plan: starter
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+  - type: web
+    name: mcp-server-memory
+    env: docker
+    dockerfilePath: Dockerfile
+    dockerCommand: "node packages/server-memory/dist/index.js"
+    plan: starter
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MCP_MEMORY_PATH
+        value: /tmp/mcp-memory.json
+
+  - type: web
+    name: mcp-server-fetch
+    env: docker
+    dockerfilePath: Dockerfile
+    dockerCommand: "node packages/server-fetch/dist/index.js"
+    plan: starter
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+  - type: web
+    name: mcp-server-web-search
+    env: docker
+    dockerfilePath: Dockerfile
+    dockerCommand: "node packages/server-web-search/dist/index.js"
+    plan: starter
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+  - type: web
+    name: mcp-server-code-runner
+    env: docker
+    dockerfilePath: Dockerfile
+    dockerCommand: "node packages/server-code-runner/dist/index.js"
+    plan: starter
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+  - type: web
+    name: mcp-server-knowledge
+    env: docker
+    dockerfilePath: Dockerfile
+    dockerCommand: "node packages/server-knowledge/dist/index.js"
+    plan: starter
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+  - type: web
+    name: mcp-server-database
+    env: docker
+    dockerfilePath: Dockerfile
+    dockerCommand: "node packages/server-database/dist/index.js"
+    plan: starter
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MCP_DB_PATH
+        value: /tmp/mcp-db.sqlite
+
+  - type: web
+    name: mcp-server-filesystem
+    env: docker
+    dockerfilePath: Dockerfile
+    dockerCommand: "node packages/server-filesystem/dist/index.js"
+    plan: starter
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MCP_ALLOWED_DIRS
+        value: /tmp
