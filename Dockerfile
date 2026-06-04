@@ -36,7 +36,21 @@ COPY packages/server-fetch/src ./packages/server-fetch/src
 COPY packages/server-code-runner/src ./packages/server-code-runner/src
 COPY packages/server-knowledge/src ./packages/server-knowledge/src
 
-RUN npm run build
+RUN npx tsc --project packages/shared && \
+    npx tsc --project packages/server-weather && \
+    npx tsc --project packages/server-translator && \
+    npx tsc --project packages/server-datetime && \
+    npx tsc --project packages/server-calculator && \
+    npx tsc --project packages/server-qrcode && \
+    npx tsc --project packages/server-rss && \
+    npx tsc --project packages/server-memory && \
+    npx tsc --project packages/server-fetch && \
+    npx tsc --project packages/server-web-search && \
+    npx tsc --project packages/server-code-runner && \
+    npx tsc --project packages/server-knowledge && \
+    npx tsc --project packages/server-database && \
+    npx tsc --project packages/server-filesystem && \
+    npx tsc --project packages/cli
 
 FROM node:22-alpine
 WORKDIR /app
