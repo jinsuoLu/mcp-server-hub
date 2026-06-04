@@ -21,7 +21,9 @@ COPY packages/server-knowledge/package.json packages/server-knowledge/tsconfig.j
 
 RUN npm install -g pnpm@9.4.0 && \
     pnpm config set allow-builds.better-sqlite3 true && \
-    pnpm install --shamefully-hoist
+    pnpm install --shamefully-hoist && \
+    ls -la node_modules/@modelcontextprotocol && \
+    cat node_modules/@modelcontextprotocol/sdk/package.json
 
 COPY packages/shared/src ./packages/shared/src
 COPY packages/server-weather/src ./packages/server-weather/src
