@@ -1,6 +1,7 @@
 FROM node:22-alpine AS builder
 WORKDIR /app
 RUN apk add --no-cache build-base python3 sqlite-dev
+
 COPY pnpm-workspace.yaml package.json tsconfig.base.json ./
 COPY packages/shared/package.json packages/shared/tsconfig.json ./packages/shared/
 
@@ -18,9 +19,8 @@ COPY packages/server-fetch/package.json packages/server-fetch/tsconfig.json ./pa
 COPY packages/server-code-runner/package.json packages/server-code-runner/tsconfig.json ./packages/server-code-runner/
 COPY packages/server-knowledge/package.json packages/server-knowledge/tsconfig.json ./packages/server-knowledge/
 
-ENV PNPM_CONFIG_IGNORE_SCRIPTS=false
 RUN npm install -g pnpm && \
-    pnpm install --no-frozen-lockfile
+    pnpm install --no-frozen-lockfile --unsafe-perm
 
 COPY packages/shared/src ./packages/shared/src
 COPY packages/server-weather/src ./packages/server-weather/src
