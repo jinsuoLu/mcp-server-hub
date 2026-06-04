@@ -15,7 +15,12 @@
     "declarationMap": true,
     "sourceMap": true,
     "composite": true,
-    "incremental": true
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@modelcontextprotocol/sdk": ["node_modules/@modelcontextprotocol/sdk"],
+      "@modelcontextprotocol/sdk/*": ["node_modules/@modelcontextprotocol/sdk/*"]
+    }
   },
   "exclude": ["node_modules", "dist", "**/*.test.ts"]
 }
